@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: 'General Sans', sans-serif;
+    width: 100dvw;
+    background-color: #dfdff0;
+    overflow-x: hidden;
+}
+
+@layer base {
+    @font-face {
+        font-family: 'circular-web';
+        src: url('/fonts/circularweb-book.woff2') format('woff2');
+    }
+
+    @font-face {
+        font-family: 'general';
+        src: url('/fonts/general.woff2') format('woff2');
+    }
+
+    @font-face {
+        font-family: 'robert-medium';
+        src: url('/fonts/robert-medium.woff2') format('woff2');
+    }
+
+    @font-face {
+        font-family: 'robert-regular';
+        src: url('/fonts/robert-regular.woff2') format('woff2');
+    }
+}
+
+
+@layer utilities {
+
+    @keyframes autoRun {
+        from {
+            transform: perspective(1000px) rotateX(-16deg) rotateY(0deg);
+        }
+        to {
+            transform: perspective(1000px) rotateX(-16deg) rotateY(360deg);
+        }
+    }
+
+    .animate-autoRun {
+        animation: autoRun 30s linear infinite;
+    }
+
+    .slider-container {
+        @apply absolute w-[200px] h-[200px] top-[20%] left-[calc(50%-100px)] transform z-[2] animate-autoRun ;
+        transform-style: preserve-3d;
+        perspective: 4000px;
+    }
+
+    .slider-item {
+        @apply absolute inset-x-0 inset-y-0;
+        transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(300px);
+        transform-origin: center;
+        transition: transform 0.3s ease;
+        scale: calc(1 + (200px / (200px + var(--position))));
+    }
+
+     /* Animation for the text appearance */
+  .animate-text {
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+    .font-ica-rubrik {
+        font-family: 'ICA Rubrik', sans-serif;
+    }
+
+    .font-poppins {
+        font-family: 'Poppins', sans-serif;
+    }
+
+}
