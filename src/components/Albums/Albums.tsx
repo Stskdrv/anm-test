@@ -36,7 +36,6 @@ const Albums: React.FC = () => {
   return (
     <section className="pb-52">
       <div className="container mx-auto px-3 md:px-10">
-        {/* Section Heading */}
         <div className="px-5 py-32">
           <p className="font-circular-web text-lg">
             Short intro in Post Malone's oeuvre.
@@ -54,6 +53,9 @@ const Albums: React.FC = () => {
             key={album.id}
             ref={(el) => (albumRefs.current[index] = el)}
             className="opacity-0 translate-y-10 transition-transform duration-1000 ease-out mb-10"
+            role="listitem"
+            aria-labelledby={`album-title-${album.id}`}
+            aria-describedby={`album-desc-${album.id}`}
           >
             <CardTilt className="relative h-96 w-full overflow-hidden rounded-md md:h-[65vh]">
               <AlbumCard

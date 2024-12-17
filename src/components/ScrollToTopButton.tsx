@@ -28,7 +28,8 @@ const ScrollToTopButton: React.FC<ScrollToTopProviderProps> = ({
       {children}
       {showScrollButton && (
         <button
-          title="Get back to top"
+          title="Scroll to top"
+          aria-label="Scroll to top"
           className="
             fixed 
             bottom-6 
@@ -43,6 +44,12 @@ const ScrollToTopButton: React.FC<ScrollToTopProviderProps> = ({
             transform 
             hover:scale-110"
           onClick={scrollToTop}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              scrollToTop();
+            }
+          }}
+          tabIndex={0}
         >
           ↑
         </button>
