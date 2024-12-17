@@ -3,65 +3,57 @@
 @tailwind utilities;
 
 body {
-    font-family: 'General Sans', sans-serif;
-    width: 100dvw;
-    background-color: #dfdff0;
-    overflow-x: hidden;
+  font-family: 'General Sans', sans-serif;
+  width: 100dvw;
+  background-color: #dfdff0;
+  overflow-x: hidden;
 }
 
 @layer base {
-    @font-face {
-        font-family: 'circular-web';
-        src: url('/fonts/circularweb-book.woff2') format('woff2');
-    }
+  @font-face {
+    font-family: 'circular-web';
+    src: url('/fonts/circularweb-book.woff2') format('woff2');
+  }
 
-    @font-face {
-        font-family: 'general';
-        src: url('/fonts/general.woff2') format('woff2');
-    }
-
-    @font-face {
-        font-family: 'robert-medium';
-        src: url('/fonts/robert-medium.woff2') format('woff2');
-    }
-
-    @font-face {
-        font-family: 'robert-regular';
-        src: url('/fonts/robert-regular.woff2') format('woff2');
-    }
+  @font-face {
+    font-family: 'general';
+    src: url('/fonts/general.woff2') format('woff2');
+  }
 }
 
 
 @layer utilities {
 
-    @keyframes autoRun {
-        from {
-            transform: perspective(1000px) rotateX(-16deg) rotateY(0deg);
-        }
-        to {
-            transform: perspective(1000px) rotateX(-16deg) rotateY(360deg);
-        }
+  /* Slider CSS classes */
+  @keyframes autoRun {
+    from {
+      transform: perspective(1000px) rotateX(-16deg) rotateY(0deg);
     }
 
-    .animate-autoRun {
-        animation: autoRun 30s linear infinite;
+    to {
+      transform: perspective(1000px) rotateX(-16deg) rotateY(360deg);
     }
+  }
 
-    .slider-container {
-        @apply absolute w-[200px] h-[200px] top-[20%] left-[calc(50%-100px)] transform z-[2] animate-autoRun ;
-        transform-style: preserve-3d;
-        perspective: 4000px;
-    }
+  .animate-autoRun {
+    animation: autoRun 30s linear infinite;
+  }
 
-    .slider-item {
-        @apply absolute inset-x-0 inset-y-0;
-        transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(300px);
-        transform-origin: center;
-        transition: transform 0.3s ease;
-        scale: calc(1 + (200px / (200px + var(--position))));
-    }
+  .slider-container {
+    @apply absolute w-[200px] h-[200px] top-[20%] left-[calc(50%-100px)] transform z-[2] animate-autoRun;
+    transform-style: preserve-3d;
+    perspective: 4000px;
+  }
 
-     /* Animation for the text appearance */
+  .slider-item {
+    @apply absolute inset-x-0 inset-y-0;
+    transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(300px);
+    transform-origin: center;
+    transition: transform 0.3s ease;
+    scale: calc(1 + (200px / (200px + var(--position))));
+  }
+
+  /* Animation for the text appearance */
   .animate-text {
     opacity: 0;
     animation: fadeIn 2s forwards;
@@ -71,17 +63,114 @@ body {
     0% {
       opacity: 0;
     }
+
+    100% {
+      opacity: 1;
+    }
+  }
+  /* CSS classes for loader component */
+  .loader-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #25283b, #1f1b3a);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .loader {
+    border: 6px solid transparent;
+    border-top: 6px solid #6c63ff;
+    border-right: 6px solid #ff6584;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    box-shadow: 0 0 10px #6c63ff, 0 0 15px #ff6584;
+    animation: spin 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite, fade-in 0.5s ease-in-out;
+  }
+
+  .loader:after {
+    content: "";
+    border: 6px solid transparent;
+    border-bottom: 6px solid #f9a826;
+    border-left: 6px solid #00dbde;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    animation: spin-reverse 1.5s linear infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes spin-reverse {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(-360deg);
+    }
+  }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+
     100% {
       opacity: 1;
     }
   }
 
-    .font-ica-rubrik {
-        font-family: 'ICA Rubrik', sans-serif;
-    }
+  .loader-container p {
+    margin-top: 15px;
+    font-size: 1.2em;
+    color: #d1d2f9;
+    text-shadow: 0 0 5px #6c63ff;
+    animation: fade-in 1s ease-in-out;
+  }
+  /* CSS classes for scroll button */
+  .scroll-to-top-button {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 50;
+    padding: 1rem;
+    background-color: #3498db;
+    color: white;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  }
 
-    .font-poppins {
-        font-family: 'Poppins', sans-serif;
-    }
+  .scroll-to-top-button:hover {
+    background-color: #1d78c1;
+    transform: scale(1.1);
+  }
+ /* CSS classes for scroll based cards appearence */
+ @keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
+.animate-fade-in {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
 }
